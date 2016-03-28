@@ -1,0 +1,9 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = github.com:anishathalye/dotbot
+[submodule "fonts/powerline_fonts"]
+	path = fonts/powerline_fonts
+	url = github.com:powerline/fonts
+[submodule "vim/bundle/Vundle.vim"]
+	path = vim/bundle/Vundle.vim
+	url = github.com:VundleVim/Vundle.vim
