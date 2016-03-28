@@ -12,7 +12,6 @@
     ~/.dotfiles: ''
     ~/.vimrc: vim/vimrc
     ~/.vim/bundle: vim/bundle
-    ~/.ssh: ssh
     ~/.tmux.conf: tmux/tmux.conf
     ~/.config/terminator/config: terminator/config
     ~/.bashrc.d: bash/bashrc.d
