@@ -15,7 +15,7 @@
     cursor_color = "#c20257"
     foreground_color = "#ffffff"
     show_titlebar = False
-    font = Droid Sans Mono 11
+    font = Source Code Pro for Powerline Medium 12
     background_color = "#0d0d0d"
     scrollback_infinite = True
 [layouts]
