@@ -1,0 +1,174 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set t_Co=256
+
+" ---------------------------------- "
+" Vundle
+" ---------------------------------- "
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ryanoasis/vim-startify'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'itchyny/lightline.vim'
+Plugin 'edkolev/tmuxline.vim'
+
+Plugin 'taketwo/vim-ros'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" ---------------------------------- "
+" Common
+" ---------------------------------- "
+colorscheme molokai
+syntax on
+
+" Highlight the current line
+set cursorline
+
+" Highlight search results as we type
+set incsearch
+" ignore case when searching...
+set ignorecase
+" ...except if we input a capital letter
+set smartcase
+
+" Show invisible characters
+set list
+set listchars=tab:→\ ,trail:·,eol:˧
+
+" Set split pane direction to be more natural
+set splitbelow
+set splitright
+
+" Buffer navigation
+noremap <Leader>] :bnext<CR>
+noremap <Leader>[ :bprev<CR>
+
+" bbye remap to w
+noremap <Leader>w :Bdelete<CR>
+
+" Navigate panes with control
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+
+" remap : to ; to avoid pressing Shift
+nnoremap ; :
+vnoremap ; :
+
+" remap  leader key to spacebar
+let mapleader = '\'
+
+" Python shiftwidth, tabstop, softtabstop
+autocmd FileType python set sw=4
+autocmd FileType python set ts=4
+autocmd FileType python set sts=4
+
+" Show linenumbers
+set number
+
+" ------------------------------------+
+" vim-ros config
+let g:ros_make='all'
+let g:ros_build_system='catkin-tools'
+let g:ycm_semantic_triggers = {
+\   'roslaunch' : ['="', '$(', '/'],
+\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+\ }
+
+" ------------------------------------+
+" nerdtree config
+
+" Open nerdtree if vim is started without a file
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close vim if the only open buffer is a nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Map ctrl+n to toggle nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+let NERDTreeMapOpenSplit = '<C-x>'
+let NERDTreeMapOpenVSplit = '<C-v>'
+let NERDTreeMapOpenInTab = '<C-t>'
+
+" ------------------------------------+
+" ctrl-p config
+" show hidden files
+let g:ctrlp_show_hidden = 1
+
+set wildignore+=*/.git/*,*/build/*,*/devel/*,*/install/*
+
+" ------------------------------------+
+" lightline config
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo'], ['percent'], ['filetype'] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive':  'LightLineFugitive',
+      \   'readonly':  'LightlineReadonly',
+      \   'modified':  'LightlineModified',
+      \   'filename':  'LightlineFilename'
+      \ },
+      \ 'separator': { 'left': "\uE0B0", 'right': "\uE0B2"},
+      \ 'subseparator': { 'left': "\uE0B1", 'right': "\uE0B3" }
+      \ }
+
+function! LightLineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "\uE0A2"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+" ------------------------------------+
+" YouCompleteMe config
+
+" <Enter> key completion
+"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']

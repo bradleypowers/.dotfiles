@@ -1,0 +1,23 @@
+- defaults:
+        link:
+            relink: true
+            create: true
+
+- clean: ['~']
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+
+- link:
+    ~/.dotfiles: ''
+    ~/.vimrc: vim/vimrc
+    ~/.vim/bundle: vim/bundle
+    ~/.ssh: ssh
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.config/terminator/config: terminator/config
+    ~/.bashrc.d: bash/bashrc.d
+    ~/.bashrc: bash/bashrc
+
+- shell:
+    - [vim +PluginInstall +qall, Installing Vim plugins]
+    - [~/.dotfiles/fonts/powerline_fonts/install.sh, Installing Powerline patched fonts]
