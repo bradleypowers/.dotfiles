@@ -19,7 +19,6 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'itchyny/lightline.vim'
 Plugin 'edkolev/tmuxline.vim'
 
-Plugin 'taketwo/vim-ros'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
