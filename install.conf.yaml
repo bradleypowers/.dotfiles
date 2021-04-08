@@ -1,7 +1,10 @@
 - defaults:
         link:
+            force: true
             relink: true
             create: true
+        create:
+            mode: 0755
 
 - clean: ['~']
 
@@ -9,14 +12,31 @@
     - [git submodule update --init --recursive, Installing submodules]
 
 - link:
-    ~/.dotfiles: ''
     ~/.vimrc: vim/vimrc
     ~/.vim/bundle: vim/bundle
     ~/.tmux.conf: tmux/tmux.conf
     ~/.config/terminator/config: terminator/config
     ~/.bashrc.d: bash/bashrc.d
     ~/.bashrc: bash/bashrc
+    ~/.config/user-dirs.dirs: config/user-dirs.dirs
 
 - shell:
     - [vim +PluginInstall +qall, Installing Vim plugins]
+    - [rm -r ~/Desktop, removing Desktop]
+    - [mkdir ~/.desktop, creating .desktop]
+    - [rm -r ~/Downloads, removing Downloads]
+    - [mkdir ~/downloads, creating downloads]
+    - [rm -r ~/Templates, removing Templates]
+    - [mkdir ~/.templates, creating .templates]
+    - [rm -r ~/Public, removing Public]
+    - [mkdir ~/.public, creating .public]
+    - [rm -r ~/Documents, removing Documents]
+    - [mkdir ~/.documents, creating .documents]
+    - [rm -r ~/Music, removing Music]
+    - [mkdir ~/.music, creating .music]
+    - [rm -r ~/Pictures, removing Pictures]
+    - [mkdir ~/.pictures, creating .pictures]
+    - [rm -r ~/Videos, removing Videos]
+    - [mkdir ~/.videos, creating .videos]
     - [~/.dotfiles/fonts/powerline_fonts/install.sh, Installing Powerline patched fonts]
+    - [xdg-user-dirs-update, Updating User dirs]
