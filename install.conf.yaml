@@ -39,4 +39,5 @@
     - [rm -r ~/Videos, removing Videos]
     - [mkdir ~/.videos, creating .videos]
     - [~/.dotfiles/fonts/powerline_fonts/install.sh, Installing Powerline patched fonts]
+    - [~/.dotfiles/fonts/nerd-fonts/install.sh, Installing Nerd Fonts]
     - [xdg-user-dirs-update, Updating User dirs]

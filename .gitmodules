@@ -7,3 +7,6 @@
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = github.com:VundleVim/Vundle.vim
+[submodule "fonts/nerd-fonts"]
+	path = fonts/nerd-fonts
+	url = github.com:ryanoasis/nerd-fonts

@@ -2,6 +2,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set t_Co=256
 
+
 " ---------------------------------- "
 " Vundle
 " ---------------------------------- "
@@ -29,6 +30,9 @@ filetype plugin indent on    " required
 " ---------------------------------- "
 colorscheme molokai
 syntax on
+
+" disable vim swapfiles
+set noswapfile
 
 " Highlight the current line
 set cursorline
@@ -65,9 +69,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap ; :
 vnoremap ; :
 
-" remap  leader key to spacebar
-let mapleader = '\'
-
 " Python shiftwidth, tabstop, softtabstop
 autocmd FileType python set sw=4
 autocmd FileType python set ts=4
@@ -76,27 +77,25 @@ autocmd FileType python set sts=4
 " Show linenumbers
 set number
 
-" ------------------------------------+
-" vim-ros config
-let g:ros_make='all'
-let g:ros_build_system='catkin-tools'
-let g:ycm_semantic_triggers = {
-\   'roslaunch' : ['="', '$(', '/'],
-\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
-\ }
+" Put vim in paste mode by default
+set paste
 
 " ------------------------------------+
 " nerdtree config
 
 " Open nerdtree if vim is started without a file
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Close vim if the only open buffer is a nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Map ctrl+n to toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
+
+" Start NERDTree. If a file is specified, move the cursor to its window.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 let NERDTreeMapOpenSplit = '<C-x>'
 let NERDTreeMapOpenVSplit = '<C-v>'
